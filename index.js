@@ -62,8 +62,9 @@ function updateBookList(){
         let newButtonRead = buttonRead.cloneNode();
         let newButtonRemove = buttonRemove.cloneNode();
 
+        newButtonRemove.setAttribute("data-id", element["id"]);
         newButtonRemove.addEventListener("click", (e)=>{
-            removeBookFromLibrary(e.target.parentElement.id);
+            removeBookFromLibrary(e.target.getAttribute("data-id"));
             updateBookList();
         });
 
