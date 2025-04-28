@@ -5,47 +5,27 @@ const buttonAdd = document.querySelector("#book-add-new");
 const newBookForm = document.querySelector("#book-new-form");
 const buttonNewBookFormSubmit = document.querySelector("#form-book-submit-btn");
 
-const bookLibrary = [
-    {
-      "id": "2a0cc60c-4160-4430-a0a6-316bcdb1f7d9",
-      "title": "book01",
-      "author": "author01",
-      "pages": 123,
-      "read": false
-    },
-    {
-      "id": "e84bc301-9006-4dfc-9e7b-13288c57c871",
-      "title": "book02",
-      "author": "author02",
-      "pages": 546,
-      "read": false
-    },
-    {
-      "id": "11e47826-6bbe-4f82-a314-016ffb6c66dc",
-      "title": "book03",
-      "author": "author03",
-      "pages": 274,
-      "read": true
-    }
-  ];
+const bookLibrary = [];
+
+//Temporary book list
+addBookToLibrary("Book01", "Author01", 442, true);
+addBookToLibrary("Book02", "Author02", 948, false);
+addBookToLibrary("Book03", "Author03", 167, true);
 
 function Book(title, author, pages, read = false) {
     //book constructor
     if (!new.target) {
       throw Error("You must use the 'new' operator to call the constructor");
     }
+    this.id = crypto.randomUUID();
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
 
-    return {
-        "id": crypto.randomUUID(),
-        "title": this.title,
-        "author": this.author,
-        "pages": this.pages,
-        "read": this.read,
-    }
+    this.setRead = function(){
+        this.read = !this.read;
+    };
   };
 
 function addBookToLibrary(title, author, pages, read){
@@ -68,8 +48,10 @@ function updateBookList(){
             updateBookList();
         });
 
+        newButtonRead.setAttribute("data-id", element["id"]);
         newButtonRead.addEventListener("click", (e)=>{
-            updateBookReadStatus(e.target.parentElement.id);
+            let bookArrayIndex = getBookArrayIndexFromId(e.target.getAttribute("data-id"))
+            bookLibrary[bookArrayIndex].setRead();
             updateBookList();
         });
 
@@ -113,8 +95,6 @@ buttonAdd.addEventListener("click", (e)=>{
 });
 
 buttonNewBookFormSubmit.addEventListener("click", (e)=>{
-    console.log("form submitted")
-
     let newFormData = new FormData(newBookForm);
     let newBookObject = {};
 
