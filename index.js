@@ -1,6 +1,9 @@
 const bookList = document.querySelector("#book-list");
 const buttonRead = document.createElement("button");
 const buttonRemove = document.createElement("button");
+const buttonAdd = document.querySelector("#book-add-new");
+const newBookForm = document.querySelector("#book-new-form");
+//const buttonNewBookFormSubmit = document.querySelector("#form-book-submit");
 
 const bookLibrary = [
     {
@@ -82,7 +85,6 @@ function updateBookList(){
         bookList.appendChild(newItem);
     });
     
-
 };
 
 updateBookList(); // to be removed eventually
@@ -103,3 +105,12 @@ function updateBookReadStatus(id){
 
     bookLibrary[bookArrayIndex].read = !bookLibrary[bookArrayIndex].read;
 };
+
+function addNewBookToLibrary(){
+    console.log("Add new book: to be implemented");
+};
+
+buttonAdd.addEventListener("click", (e)=>{
+    newBookForm.hidden = newBookForm.hidden?false:true;
+    e.target.textContent = newBookForm.hidden?"Show new book form":"Hide new book form";
+});
