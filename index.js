@@ -64,6 +64,11 @@ function updateBookList(){
             updateBookList();
         });
 
+        newButtonRead.addEventListener("click", (e)=>{
+            updateBookReadStatus(e.target.parentElement.id);
+            updateBookList();
+        });
+
         newInfo.textContent = "\"" + element["name"] + "\", " + element["author"] + ", pages: " + element["pages"] + ", status: " + (element["read"]?"finished.":"not finished.");
         
         newButtonRead.textContent = "Mark as read";
@@ -82,8 +87,19 @@ function updateBookList(){
 
 updateBookList(); // to be removed eventually
 
+function getBookArrayIndexFromId(id){
+    //this returns the bookLibrary array index based on id
+    return bookLibrary.findIndex((element)=>{return element["id"] == id});
+};
+
 function removeBookFromLibrary(id){
-    let bookArrayIndex = bookLibrary.findIndex((element)=>{return element["id"] == id});
+    let bookArrayIndex = getBookArrayIndexFromId(id);
 
     bookLibrary.splice(bookArrayIndex, 1);
+};
+
+function updateBookReadStatus(id){
+    let bookArrayIndex = getBookArrayIndexFromId(id);
+
+    bookLibrary[bookArrayIndex].read = !bookLibrary[bookArrayIndex].read;
 };
