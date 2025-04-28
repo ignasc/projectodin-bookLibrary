@@ -51,8 +51,21 @@ function addBookToLibrary(name, author, pages, read){
 function updateBookList(){
     
     bookLibrary.forEach(element => {
-        let newItem = document.createElement("ul");
-        newItem.textContent = "\"" + element["name"] + "\", " + element["author"] + ", pages: " + element["pages"] + ", status: " + (element["read"]?"finished.":"not finished.");
+        let newItem = document.createElement("li");
+        let newInfo = document.createElement("p");
+        let buttonRead = document.createElement("button");
+        let buttonRemove = document.createElement("button");
+
+        newInfo.textContent = "\"" + element["name"] + "\", " + element["author"] + ", pages: " + element["pages"] + ", status: " + (element["read"]?"finished.":"not finished.");
+        
+        buttonRead.textContent = "Mark as read";
+        buttonRemove.textContent = "Remove from library";
+        
+        newItem.setAttribute("id",element["id"]);
+        newItem.appendChild(newInfo);
+        newItem.appendChild(buttonRead);
+        newItem.appendChild(buttonRemove);
+        
         bookList.appendChild(newItem);
     });
     
