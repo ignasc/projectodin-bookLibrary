@@ -1,4 +1,7 @@
 const bookList = document.querySelector("#book-list");
+const buttonRead = document.createElement("button");
+const buttonRemove = document.createElement("button");
+
 const bookLibrary = [
     {
       "id": "2a0cc60c-4160-4430-a0a6-316bcdb1f7d9",
@@ -49,22 +52,27 @@ function addBookToLibrary(name, author, pages, read){
 };
 
 function updateBookList(){
-    
+    bookList.textContent = '';//clear book list element
     bookLibrary.forEach(element => {
         let newItem = document.createElement("li");
         let newInfo = document.createElement("p");
-        let buttonRead = document.createElement("button");
-        let buttonRemove = document.createElement("button");
+        let newButtonRead = buttonRead.cloneNode();
+        let newButtonRemove = buttonRemove.cloneNode();
+
+        newButtonRemove.addEventListener("click", (e)=>{
+            removeBookFromLibrary(e.target.parentElement.id);
+            updateBookList();
+        });
 
         newInfo.textContent = "\"" + element["name"] + "\", " + element["author"] + ", pages: " + element["pages"] + ", status: " + (element["read"]?"finished.":"not finished.");
         
-        buttonRead.textContent = "Mark as read";
-        buttonRemove.textContent = "Remove from library";
+        newButtonRead.textContent = "Mark as read";
+        newButtonRemove.textContent = "Remove from library";
         
         newItem.setAttribute("id",element["id"]);
         newItem.appendChild(newInfo);
-        newItem.appendChild(buttonRead);
-        newItem.appendChild(buttonRemove);
+        newItem.appendChild(newButtonRead);
+        newItem.appendChild(newButtonRemove);
         
         bookList.appendChild(newItem);
     });
@@ -72,4 +80,10 @@ function updateBookList(){
 
 };
 
-updateBookList();
+updateBookList(); // to be removed eventually
+
+function removeBookFromLibrary(id){
+    let bookArrayIndex = bookLibrary.findIndex((element)=>{return element["id"] == id});
+
+    bookLibrary.splice(bookArrayIndex, 1);
+};
