@@ -1,3 +1,4 @@
+const bookList = document.querySelector("#book-list");
 const bookLibrary = [
     {
       "id": "2a0cc60c-4160-4430-a0a6-316bcdb1f7d9",
@@ -46,3 +47,16 @@ function addBookToLibrary(name, author, pages, read){
     let newBook = new Book(name, author, pages, read);
     bookLibrary.push(newBook);
 };
+
+function updateBookList(){
+    
+    bookLibrary.forEach(element => {
+        let newItem = document.createElement("ul");
+        newItem.textContent = "\"" + element["name"] + "\", " + element["author"] + ", pages: " + element["pages"] + ", status: " + (element["read"]?"finished.":"not finished.");
+        bookList.appendChild(newItem);
+    });
+    
+
+};
+
+updateBookList();
