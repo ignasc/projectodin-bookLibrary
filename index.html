@@ -14,23 +14,27 @@
     <button id="book-add-new">Show new book form</button>
     <form action="#" id="book-new-form" hidden>
         <br>
-        <label for="form-book-title">Book title</label>
+        <label for="form-book-title">Book title*</label>
+        <input type="text" placeholder="book title" id="form-book-title" name="title" required>
 
         <br>
 
-        <input type="text" placeholder="Title" id="form-book-title">
-
-        <br><br>
-
-        <label for="form-book-author">Book author</label>
+        <label for="form-book-author">Book author*</label>
+        <input type="text" placeholder="Book author" id="form-book-author" name="author" required>
 
         <br>
 
-        <input type="text" placeholder="Author" id="form-book-author">
+        <label for="form-book-pages">Number of pages</label>
+        <input type="number" pattern="[0-9]" id="form-book-pages" name="pages">
 
         <br>
 
-        <input type="submit" value="Submit" id="form-book-submit">
+        <label for="form-book-read">Finished reading</label>
+        <input type="checkbox" id="form-book-read" name="read">
+
+        <br>
+
+        <input type="submit" value="Submit" id="form-book-submit-btn">
         <br><br>
     </form>
     <ul id="book-list"></ul>
