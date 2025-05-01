@@ -24,7 +24,12 @@ function Book(title, author, pages, read = false) {
     this.read = read;
 
     this.setRead = function(){
+        //change read status
         this.read = !this.read;
+    };
+
+    this.getFullInfo = function(){
+        return "\"" + this.title + "\", " + this.author + ", pages: " + this.pages + ", status: " + (this.read?"finished.":"not finished.");
     };
   };
 
@@ -55,7 +60,7 @@ function updateBookList(){
             updateBookList();
         });
 
-        newInfo.textContent = "\"" + element["title"] + "\", " + element["author"] + ", pages: " + element["pages"] + ", status: " + (element["read"]?"finished.":"not finished.");
+        newInfo.textContent = element.getFullInfo();
         
         newButtonRead.textContent = "Update read status";
         newButtonRemove.textContent = "Remove from library";
