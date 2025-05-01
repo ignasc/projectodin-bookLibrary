@@ -27,10 +27,6 @@ function Book(title, author, pages, read = false) {
         //change read status
         this.read = !this.read;
     };
-
-    this.getFullInfo = function(){
-        return "\"" + this.title + "\", " + this.author + ", pages: " + this.pages + ", status: " + (this.read?"finished.":"not finished.");
-    };
   };
 
 function addBookToLibrary(title, author, pages, read){
@@ -41,34 +37,49 @@ function addBookToLibrary(title, author, pages, read){
 
 function updateBookList(){
     bookList.textContent = '';//clear book list element
-    bookLibrary.forEach(element => {
+    bookLibrary.forEach(book => {
         let newItem = document.createElement("li");
-        let newInfo = document.createElement("p");
+        let divBookTitle = document.createElement("p");
+        let divBookAuthor = document.createElement("p");
+        let divBookPages = document.createElement("p");
+        let divBookRead = document.createElement("p");
+        let divBookContainer = document.createElement("div");
+        let divButtonContainer = document.createElement("div");
         let newButtonRead = buttonRead.cloneNode();
         let newButtonRemove = buttonRemove.cloneNode();
 
-        newButtonRemove.setAttribute("data-id", element["id"]);
+        newButtonRemove.setAttribute("data-id", book["id"]);
         newButtonRemove.addEventListener("click", (e)=>{
             removeBookFromLibrary(e.target.getAttribute("data-id"));
             updateBookList();
         });
 
-        newButtonRead.setAttribute("data-id", element["id"]);
+        newButtonRead.setAttribute("data-id", book["id"]);
         newButtonRead.addEventListener("click", (e)=>{
             let bookArrayIndex = getBookArrayIndexFromId(e.target.getAttribute("data-id"))
             bookLibrary[bookArrayIndex].setRead();
             updateBookList();
         });
 
-        newInfo.textContent = element.getFullInfo();
+        divBookTitle.textContent = book.title;
+        divBookAuthor.textContent = book.author;
+        divBookPages.textContent = book.pages;
+        divBookRead.textContent = (book.read?"finished.":"not finished.");
         
         newButtonRead.textContent = "Update read status";
         newButtonRemove.textContent = "Remove from library";
+
+        divBookContainer.appendChild(divBookTitle);
+        divBookContainer.appendChild(divBookAuthor);
+        divBookContainer.appendChild(divBookPages);
+        divBookContainer.appendChild(divBookRead);
+
+        divButtonContainer.appendChild(newButtonRead);
+        divButtonContainer.appendChild(newButtonRemove);
         
-        newItem.setAttribute("id",element["id"]);
-        newItem.appendChild(newInfo);
-        newItem.appendChild(newButtonRead);
-        newItem.appendChild(newButtonRemove);
+        newItem.setAttribute("id",book["id"]);
+        newItem.appendChild(divBookContainer);
+        newItem.appendChild(divButtonContainer);
         
         bookList.appendChild(newItem);
     });
