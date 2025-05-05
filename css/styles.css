@@ -1,0 +1,59 @@
+body{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: 50px 1fr;
+}
+
+#book-add-new {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    justify-self: center;
+    align-self: center;
+}
+
+#book-new-form {
+    grid-column: 1 / 2;
+    grid-row: 2 / -1;
+}
+
+#book-list {
+    grid-column: 2 / -1;
+    grid-row: 1 / -1;
+
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(max-content, 300px));
+}
+
+.book-card {
+    background-color: aqua;
+    padding: 20px;
+    border-radius: 20px;
+
+    display: grid;
+    gap: 5px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 3fr 1fr;
+}
+
+.book-info-container {
+    background-color: burlywood;
+
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.book-button-container {
+    background-color: aquamarine;
+
+    grid-column: 1 / -1;
+    grid-row: 2 / -1;
+}
+
+.required {
+    color: rgb(173, 21, 21);
+    font-size: 0.8rem;
+    font-weight: bold;
+}
