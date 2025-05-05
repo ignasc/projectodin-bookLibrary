@@ -110,6 +110,11 @@ function updateBookReadStatus(id){
 };
 
 buttonAdd.addEventListener("click", (e)=>{
+    if(newBookForm.hidden){
+        newBookForm.style.display = "flex";
+    } else {
+        newBookForm.style.display = "none";
+    };
     newBookForm.hidden = newBookForm.hidden?false:true;
     e.target.textContent = newBookForm.hidden?"Show new book form":"Hide new book form";
 });
