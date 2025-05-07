@@ -66,6 +66,25 @@ body{
     border-radius: 10px;
 }
 
+#book-title-p {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+#book-author-p {
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+#book-pages-p {
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+}
+
+#book-read-p {
+    font-size: 0.8rem;
+}
+
 .book-button-container {
     
     grid-column: 1 / -1;

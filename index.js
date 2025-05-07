@@ -8,9 +8,9 @@ const buttonNewBookFormSubmit = document.querySelector("#form-book-submit-btn");
 const bookLibrary = [];
 
 //Temporary book list
-addBookToLibrary("Book01", "Author01", 442, true);
-addBookToLibrary("Book02", "Author02", 948, false);
-addBookToLibrary("Book03", "Author03", 167, true);
+addBookToLibrary("Forest of the Gods", "Balys Sruoga", 450, true);
+addBookToLibrary("The Alchemist", "Paulo Coelho", 208, false);
+addBookToLibrary("Harry Potter and the Philosopher's Stone", "J. K. Rowling", 223, false);
 
 function Book(title, author, pages, read = false) {
     //book constructor
@@ -49,6 +49,10 @@ function updateBookList(){
         let newButtonRemove = buttonRemove.cloneNode();
 
         newItem.setAttribute("class", "book-card");
+        divBookTitle.setAttribute("id", "book-title-p");
+        divBookAuthor.setAttribute("id", "book-author-p");
+        divBookPages.setAttribute("id", "book-pages-p");
+        divBookRead.setAttribute("id", "book-read-p");
         divBookContainer.setAttribute("class", "book-info-container");
         divButtonContainer.setAttribute("class", "book-button-container");
 
@@ -66,9 +70,9 @@ function updateBookList(){
         });
 
         divBookTitle.textContent = book.title;
-        divBookAuthor.textContent = book.author;
-        divBookPages.textContent = book.pages;
-        divBookRead.textContent = (book.read?"finished.":"not finished.");
+        divBookAuthor.textContent = "- written by " + book.author;
+        divBookPages.textContent = "Pages: " + book.pages;
+        divBookRead.textContent = "Read: " + (book.read?"finished.":"not finished.");
         
         newButtonRead.textContent = "Update read status";
         newButtonRemove.textContent = "Remove from library";
