@@ -31,6 +31,9 @@ function Book(title, author, pages, read = false) {
 
 function addBookToLibrary(title, author, pages, read){
     //add new book to library
+    if(!title || !author){
+        return;
+    };
     let newBook = new Book(title, author, pages, read);
     bookLibrary.push(newBook);
 };
