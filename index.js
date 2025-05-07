@@ -9,7 +9,7 @@ const bookLibrary = [];
 
 //Temporary book list
 addBookToLibrary("Forest of the Gods", "Balys Sruoga", 450, true);
-addBookToLibrary("The Alchemist", "Paulo Coelho", 208, false);
+addBookToLibrary("The Alchemist", "Paulo Coelho", 208, true);
 addBookToLibrary("Harry Potter and the Philosopher's Stone", "J. K. Rowling", 223, false);
 
 function Book(title, author, pages, read = false) {
