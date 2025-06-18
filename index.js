@@ -7,27 +7,28 @@ const buttonNewBookFormSubmit = document.querySelector("#form-book-submit-btn");
 
 const bookLibrary = [];
 
+class Book{
+    //book constructor
+
+    constructor(title, author, pages, read = false){
+        this.id = crypto.randomUUID();
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+
+    setRead(){
+        //change read status
+        this.read = !this.read;
+    };
+
+  };
+
 //Temporary book list
 addBookToLibrary("Forest of the Gods", "Balys Sruoga", 450, true);
 addBookToLibrary("The Alchemist", "Paulo Coelho", 208, true);
 addBookToLibrary("Harry Potter and the Philosopher's Stone", "J. K. Rowling", 223, false);
-
-function Book(title, author, pages, read = false) {
-    //book constructor
-    if (!new.target) {
-      throw Error("You must use the 'new' operator to call the constructor");
-    }
-    this.id = crypto.randomUUID();
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-
-    this.setRead = function(){
-        //change read status
-        this.read = !this.read;
-    };
-  };
 
 function addBookToLibrary(title, author, pages, read){
     //add new book to library
