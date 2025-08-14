@@ -131,6 +131,10 @@ buttonNewBookFormSubmit.addEventListener("click", (e)=>{
     let newFormData = new FormData(newBookForm);
     let newBookObject = {};
 
+    if(!isNewBookFormValidOnSubmit()){
+        return;
+    };
+
     for(const [key, value] of newFormData){
         newBookObject[key] = value;
     };
@@ -139,3 +143,72 @@ buttonNewBookFormSubmit.addEventListener("click", (e)=>{
     updateBookList();
     e.preventDefault();
 });
+
+const inputBookTitle = document.querySelector("#form-book-title")
+const inputBookAuthor = document.querySelector("#form-book-author")
+const inputBookPages = document.querySelector("#form-book-pages")
+
+inputBookTitle.addEventListener("input", (e)=>{
+    console.log(inputBookTitle.value)
+    if(inputBookTitle.validity.valueMissing){
+        inputBookTitle.setCustomValidity("Enter book title.");
+        inputBookTitle.reportValidity();
+    } else{
+        inputBookTitle.setCustomValidity("");
+    };
+
+});
+
+inputBookAuthor.addEventListener("input", (e)=>{
+    if(inputBookAuthor.validity.valueMissing){
+        inputBookAuthor.setCustomValidity("Enter book author.");
+        inputBookAuthor.reportValidity();
+    } else{
+        inputBookAuthor.setCustomValidity("");
+    };
+
+});
+
+inputBookPages.addEventListener("input", (e)=>{
+    if(inputBookPages.validity.rangeUnderflow){
+        inputBookPages.setCustomValidity("Enter a number higher than 0.");
+        inputBookPages.reportValidity();
+    } else{
+        inputBookPages.setCustomValidity("");
+    };
+
+});
+
+function isNewBookFormValidOnSubmit(){
+    let isFormValid = true;
+
+    console.log("Title value: " + inputBookTitle.value + " , validity: " + inputBookTitle.checkValidity())
+    console.log("Author value: " + inputBookAuthor.value + " , validity: " + inputBookAuthor.checkValidity())
+    console.log("Pages value: " + inputBookPages.value + " , validity: " + inputBookPages.checkValidity())
+
+    if(inputBookTitle.validity.valueMissing){
+        isFormValid = false;
+        inputBookTitle.setCustomValidity("Please enter book title");
+        inputBookTitle.reportValidity();
+    } else {
+        inputBookTitle.setCustomValidity("");
+    };
+
+    if(inputBookAuthor.validity.valueMissing){
+        isFormValid = false;
+        inputBookAuthor.setCustomValidity("Please enter book author");
+        inputBookAuthor.reportValidity();
+    } else {
+        inputBookAuthor.setCustomValidity("");
+    };
+
+    if(inputBookPages.validity.rangeUnderflow){
+        isFormValid = false;
+        inputBookPages.setCustomValidity("Please enter book pages");
+        inputBookPages.reportValidity();
+    } else {
+        inputBookPages.setCustomValidity("");
+    };
+
+    return isFormValid;
+};
