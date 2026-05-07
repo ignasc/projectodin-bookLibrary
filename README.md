@@ -1,8 +1,24 @@
 # Project Odin - Book Library
 
-Project Odin assignment. A book library webpage.
+Project Odin assignment. A simple book library webpage where you can add/remove your books.
 
 [Live preview](https://ignasc.github.io/projectodin-bookLibrary/)
+
+## Features
+
+- Add/remove books from the list.
+- Flag the book as read.
+
+## Tech stack
+
+- HTML
+- CSS
+- Javascript
+
+## Learning
+
+- Manipulating DOM elements
+- User form with required fields
 
 ## Thoughts
 
